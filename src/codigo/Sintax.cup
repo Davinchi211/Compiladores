@@ -16,9 +16,12 @@ parser code
 :};
 
 terminal tApertura, Declaracion, Entero, Decimal, Flotante, vString, Boleano,
-        tCierre, Corchete_a, Corchete_c, Op_Relacional, IfElse, FinIf
-non terminal INICIO, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, BLOQUE_COD,
-            ELSE, CIERREIF, IMPRIMIR
+        tCierre, Corchete_a, Corchete_c, Op_Relacional, IfElse, FinIf, While, FinWhile,
+        hastaW, DosPuntos, Identificador, If, digito, Op_Relacional, Asignacion, Op_Aritmeticos,
+        
+non terminal INICIO, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, COD_IF,
+            ELSE, CIERREIF, IMPRIMIR, CICLO_WHILE, SEN_REL, CIERRE_WHILE, COD_WHILE
+            
 
 /*_____DECLARAR VARIABLES_____*/
 INICIO ::= 
@@ -47,7 +50,7 @@ SENTENCIA_RELACION ::=
         Corchete_a Identificador Op_Relacional Identificador Corchete_c |
         Corchete_a Identificador Op_Relacional digito Corchete_c
 ;
-BLOQUE_COD ::= 
+COD_IF ::= 
             IMPRIMIR CIERREIF |
             IMPRIMIR ELSE
 ;
@@ -59,17 +62,27 @@ CIERREIF ::=
         tApertura FinIf tCierre
 ;
 
-/*DECLARAR CICLO WHILE*/
-CICLO_DO_WHILE ::= tApertura QC_Repite dosPuntos SEN_REL tCierre COD_W IMPRIMIR CIERRE_WHILE
-
-SEN_REL ::= Identificador Op_Relacional digito 
-        | Identificador Op_Relacional Identificador 
-
-CODIGO ::= Identificador tAsignacion digito OPERACION_ARIT digito 
-        | Identificador tAsignacion digito OPERACION_ARIT Identificador 
-
-CIERRE_WHILE ::= tApertura QC_Repite_Fin tCierre
-
+/*_____DECLARAR CICLO WHILE_____*/
+CICLO_WHILE ::= 
+    tApertura While DosPuntos SEN_REL tCierre COD_W IMPRIMIR CIERRE_WHILE
+;
+SEN_REL ::= 
+        hastaW Corchete_a Identificador Op_Relacional digito Corchete_c |
+        hastaW Corchete_a Identificador Op_Relacional Identificador Corchete_c
+;
+COD_WHILE ::= 
+        Identificador Asignacion digito Suma digito |
+        Identificador Asignacion digito Resta digito |
+        Identificador Asignacion digito Multiplicacion digito |
+        Identificador Asignacion digito Division digito |
+        Identificador Asignacion digito Suma Identificador |
+        Identificador Asignacion digito Resta Identificador |
+        Identificador Asignacion digito Multiplicacion Identificador |
+        Identificador Asignacion digito Division Identificador
+;
+CIERRE_WHILE ::= 
+            tApertura FinWhile tCierre
+;
 /*DECLARAR FOR*/
 CICLO_FOR ::= tApertura QC_Variar dosPuntos IN_FIN tCierre CODIGO IMPRIMIR CIERRE_FOR
 
