@@ -29,7 +29,7 @@ non terminal VARIABLES, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, COD_
             FINDW, SENT_DW, INI_CLASS, CLASE, COD_CLASE, CIERRE_CLASE, ATRIBUTO, 
             CONSTRUCTOR, PARAMETROS, COD_CONST, CIERRE_ATRIB, METODO, INI_METODO,
             COD_METODO, REINT, BLOQUE_METODO, BLOQ2_METOD, ARGUMENTO, ASIG,
-            DECL2, CADENA, ARGUMENTO_V, MAIN;
+            DECL2, CADENA, MAIN;
 
 /*€€€€€€€  variables €€€€€€€*/
 VARIABLES ::= 
@@ -43,7 +43,7 @@ VARIABLE ::=
         Entero |
         Decimal | 
         Flotante |
-        Boleano |
+        Boleano
 ;
 DECL2 ::=
         vString Identificador Asignacion Comillas CADENA Comillas tCierre
@@ -157,7 +157,7 @@ ATRIBUTO ::=
         tApertura Declaracion DosPuntos Modificadores_Acceso Entero Identificador tCierre ATRIBUTO|
         tApertura Declaracion DosPuntos Modificadores_Acceso Decimal Identificador tCierre ATRIBUTO|
         tApertura Declaracion DosPuntos Modificadores_Acceso Flotante Identificador tCierre ATRIBUTO|
-        tApertura Declaracion DosPuntos Modificadores_Acceso vString Identificador tCierre ATRIBUTO|
+        tApertura Declaracion DosPuntos Modificadores_Acceso vString Identificador tCierre ATRIBUTO
 ;
 CONSTRUCTOR ::= 
             tApertura Constructor Modificadores_Acceso Identificador DosPuntos PARAMETROS tCierre COD_CONST CIERRE_ATRIB
@@ -192,19 +192,13 @@ SENT_METODO ::=
 ;
 ARGUMENTO::= 
             Entero Identificador |
+            PuntoComa Entero Identificador ARGUMENTO |
             Decimal Identificador |
+            PuntoComa Decimal Identificador ARGUMENTO |
             Flotante Identificador |
-            vString Identificador |  
-;
-ARGUMENTO_V::=
-            Entero Identificador |
-            PuntoComa Entero Identificador ARGUMENTO_v |
-            Decimal Identificador |
-            PuntoComa Decimal Identificador ARGUMENTO_v |
-            Flotante Identificador |
-            PuntoComa Flotante Identificador ARGUMENTO_v |
-            vString Identificador |
-            PuntoComa vString Identificador ARGUMENTO_v |
+            PuntoComa Flotante Identificador ARGUMENTO |
+            vString Identificador
+            PuntoComa vString Identificador ARGUMENTO
 ;
 BLOQUE_METODO ::=
                 Llave_a VARIABLES BLOQ2_METOD BLOQUE_METODO |
