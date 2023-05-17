@@ -21,7 +21,7 @@ espacio=[ ,\t,\r,\n]+
 %%
 
 {espacio} {/*Ignore*/} /*Ignorar espacios*/
-{L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());} //agregue identificador, numero, error
+{L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
 ("(-"{D}+")")| {D}+ {return new Symbol(sym.Numero, yychar, yyline, yytext());}
 . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
 ("Q#") {return new Symbol(sym.Suma, yychar, yyline, yytext());} 
@@ -30,7 +30,7 @@ espacio=[ ,\t,\r,\n]+
 ("Q-") {return new Symbol(sym.Division, yychar, yyline, yytext());}
 (">>") {return new Symbol(sym.Asignacion, yychar, yyline, yytext());}
 ("%%") {return new Symbol(sym.Porcentaje, yychar, yyline, yytext());}  
-("QNEL"|"Q>>"|"Qmas"|"Qopc"|"Q<"|"Q>","Q#<"|"Q#>") {return new Symbol(sym.Op_Relacional, yychar, yyline, yytext());} //Op_relacionales
+("QNEL"|"Q>>"|"Qmas"|"Qopc"|"Q<"|"Q>","Q#<"|"Q#>") {return new Symbol(sym.Op_Relacional, yychar, yyline, yytext());} /*Op_relacionales*/
 ("[") {return new Symbol(sym.Corchete_a, yychar, yyline, yytext());}
 ("]") {return new Symbol(sym.Corchete_c, yychar, yyline, yytext());}
 ("(") {return new Symbol(sym.Parentesis_a, yychar, yyline, yytext());}
@@ -52,10 +52,10 @@ espacio=[ ,\t,\r,\n]+
 ("QC-paso-Fin")  {return new Symbol(sym.FinIf, yychar, yyline, yytext());} 
 ("QC-paso-porque-paso")  {return new Symbol(sym.IfElse, yychar, yyline, yytext());} 
 ("QC-Repite")  {return new Symbol(sym.While, yychar, yyline, yytext());} 
-("hastaQ")  {return new Symbol(sym.Hasta, yychar, yyline, yytext());} //hasta while
+("hastaQ")  {return new Symbol(sym.hastaW, yychar, yyline, yytext());} 
 ("QC-Repite-Fin")  {return new Symbol(sym.FinWhile, yychar, yyline, yytext());} 
 ("QC-Variar")  {return new Symbol(sym.For, yychar, yyline, yytext());} 
-("desde")  {return new Symbol(sym.DesdeF, yychar, yyline, yytext());}
+("desde")  {return new Symbol(sym.desdeF, yychar, yyline, yytext());}
 ("fin")  {return new Symbol(sym.finF, yychar, yyline, yytext());}
 ("paso")  {return new Symbol(sym.pasoF, yychar, yyline, yytext());}
 ("QC-Variar-Fin")  {return new Symbol(sym.forFin, yychar, yyline, yytext());} 

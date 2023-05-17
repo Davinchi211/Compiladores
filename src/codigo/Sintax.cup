@@ -15,30 +15,28 @@ parser code
 }
 :};
 
-terminal /*palabras definidas en lexico*/
-non terminal DECLARACION_VAR, IMPRIMIR, IF, cIF_ELSE, cIF_ELSE_IF, CICLO_WHILE, 
-            CICLO_FOR, CICLO_DO_WHILE, METODO, CLASE, ATRIBUTO, MAIN, INICIO, CIERRE
+terminal tApertura, Declaracion, Entero, Decimal, Flotante, vString, Boleano,
+        tCierre
+non terminal INICIO, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION,
+            BLOQUE_COD
+
+/*DECLARAR VARIABLES*/
+INICIO ::= COMIENZO VARIABLE CERRAR
+;
+COMIENZO ::= tApertura Declaracion DosPuntos
+;
+VARIABLE ::= Entero 
+        | Decimal 
+        | Flotante
+        | vString
+        | Boleano
+;
+CERRAR ::= Identificador tCierre 
+        | tCierre
+;
 
 
-start with CLASE;
-
-_________________________________
-//------declarar una clase-----//
-CLASE ::= INICIO BLOQUE_CODIGO CIERRE
-
-INICIO ::= tApertura tClase Identificador tCierre
-
-BLOQUE_CODIGO ::= ATRIBUTO CONSTRUCTOR
-
-ATRIBUTO ::= tApertura DECLARACION_VAR Variable Identificador tCierre
-
-CONSTRUCTOR ::= 
-
-CIERRE ::= tApertura tClase tCierre
-
-________________________________________________________
-//------declarar ciclo if / if else / if else if------//
-
+/*DECLARAR CICLO IF, IF ELSE, IF ELSE IF*/
 IF ::= tApertura QcPaso dosPuntos SENTENCIA_RELACION tCierre BLOQUE_COD
 
 SENTENCIA_RELACION ::= corchete_ap Identificador Op_Relacional Identificador corchete_ci
@@ -51,9 +49,8 @@ ELSE ::= tApertura QcPasopPaso tCierre BLOQUE_COD CIERREIF
         | tApertura QcPasopPaso tCierre IF
 
 CIERREIF ::= tApertura QcPasoFin tCierre
-______________________________________
-//------declarar ciclo while------//
 
+/*DECLARAR CICLO WHILE*/
 CICLO_DO_WHILE ::= tApertura QC_Repite dosPuntos SEN_REL tCierre COD_W IMPRIMIR CIERRE_WHILE
 
 SEN_REL ::= Identificador Op_Relacional digito 
@@ -63,9 +60,8 @@ CODIGO ::= Identificador tAsignacion digito OPERACION_ARIT digito
         | Identificador tAsignacion digito OPERACION_ARIT Identificador 
 
 CIERRE_WHILE ::= tApertura QC_Repite_Fin tCierre
-___________________________
-//-----declarar for------//
 
+/*DECLARAR FOR*/
 CICLO_FOR ::= tApertura QC_Variar dosPuntos IN_FIN tCierre CODIGO IMPRIMIR CIERRE_FOR
 
 IN_FIN ::= Identificador tDesde dosPuntos digito tFin dosPuntos digito tPaso dosPuntos digito
@@ -74,9 +70,8 @@ CODIGO ::= Identificador tAsignacion digito OPERACION_ARIT digito
         | Identificador tAsignacion digito OPERACION_ARIT Identificador 
 
 CIERRE_FOR ::= tApertura QC_Variar_Fin tCierre
-_______________________________
-//-----declarar do while-----//
 
+/*DECLARAR DO WHILE*/
 CICLO_DO_WHILE ::= INICIO BLOQ CONDICION2 FINDW
 
 INICIO ::= tApertura QC_Chispudo tCierre
@@ -90,3 +85,11 @@ SENTENCIA_RELACION ::= corchete_ap Identificador Op_Relacional Identificador cor
                 | corchete_ap Identificador Op_Relacional digito corchete_ci
 
 FINDW ::= tApertura QC_Chispudo_Fin tCierre
+
+/*DECLARAR UNA CLASE*/
+CLASE ::= INICIO BLOQUE_CODIGO CIERRE
+INICIO ::= tApertura tClase Identificador tCierre
+BLOQUE_CODIGO ::= ATRIBUTO CONSTRUCTOR
+ATRIBUTO ::= tApertura DECLARACION_VAR Variable Identificador tCierre
+CONSTRUCTOR ::= 
+CIERRE ::= tApertura tClase tCierre
