@@ -21,11 +21,11 @@ terminal Suma, Resta, Multiplicacion, Division, Asignacion, Porcentaje, Op_Relac
     Modificadores_Acceso, Salida, If, FinIf, IfElse, While, hastaW, FinWhile, For,
     desdeF, finF, pasoF, forFin, DoWhile, DoWhileFin, TipoEntero, Verdadero, TipoPisto,
     TipoCentavo, TipoLen, LlamaFuncion, tApertura, tCierre, DosPuntos, Identificador,
-    digito, CumpleBloque; 
+    digito, CumpleBloque, Clase, Constructor, ClaseFin, Atributo, ConstructorFin; 
 non terminal INICIO, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, COD_IF,
             ELSE, CIERREIF, IMPRIMIR, CICLO_WHILE, SEN_REL, CIERRE_WHILE, COD_WHILE,
             SEN_FOR, COD_FOR, CIERRE_FOR, DO_WHILE, INI_DOWHILE,CONDICION2,
-            FINDW, SENT_DW
+            FINDW, SENT_DW, INI_CLASS, CLASE, COD_CLASE, CIERRE_CLASE
 
 /*_____DECLARAR VARIABLES_____*/
 INICIO ::= 
@@ -120,10 +120,14 @@ SENT_DW ::=
 ;
 FINDW ::= tApertura DoWhileFin tCierre
 
-/*DECLARAR UNA CLASE*/
-CLASE ::= INICIO BLOQUE_CODIGO CIERRE
-INICIO ::= tApertura tClase Identificador tCierre
-BLOQUE_CODIGO ::= ATRIBUTO CONSTRUCTOR
+/*______DECLARAR UNA CLASE_______*/
+CLASE ::= 
+        INI_CLASS COD_CLASE CIERRE_CLASE
+;
+INI_CLASS ::= 
+            tApertura tClase Identificador tCierre
+;
+COD_CLASE ::= ATRIBUTO CONSTRUCTOR
 ATRIBUTO ::= tApertura DECLARACION_VAR Variable Identificador tCierre
 CONSTRUCTOR ::= 
-CIERRE ::= tApertura tClase tCierre
+CIERRE_CLASE ::= tApertura tClase tCierre

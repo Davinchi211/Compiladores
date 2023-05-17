@@ -68,6 +68,11 @@ espacio=[ ,\t,\r,\n]+
 ("coperachaMucha") {return new Symbol(sym.TipoCentavo, yychar, yyline, yytext());} 
 ("queChilero") {return new Symbol(sym.TipoLen, yychar, yyline, yytext());} 
 ("Reintegro") {return new Symbol(sym.LlamaFuncion, yychar, yyline, yytext());}
+("QC-camioneta") {return new Symbol(sym.Clase, yychar, yyline, yytext());}
+("QC-camioneta-Fin") {return new Symbol(sym.ClaseFin, yychar, yyline, yytext());}
+("QC-Fabricar") {return new Symbol(sym.Constructor, yychar, yyline, yytext());}
+("QC-Mio") {return new Symbol(sym.Atributo, yychar, yyline, yytext());}
+("QC-Fabricar-Fin") {return new Symbol(sym.ConstructorFin, yychar, yyline, yytext());}
 ("<") {return new Symbol(sym.tApertura, yychar, yyline, yytext());} 
 (">"){return new Symbol(sym.tCierre, yychar, yyline, yytext());} 
 (":"){return new Symbol(sym.DosPuntos, yychar, yyline, yytext());}
