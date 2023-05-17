@@ -20,25 +20,21 @@ espacio=[ ,\t,\r,\n]+
 %}
 %%
 
-/*Ignorar espacios*/
-{espacio} {}
+{espacio} {/*Ignore*/} /*Ignorar espacios*/
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());} //agregue identificador, numero, error
 ("(-"{D}+")")| {D}+ {return new Symbol(sym.Numero, yychar, yyline, yytext());}
-. {return new Symbol(sym.Error, yychar, yyline, yytext());}
+. {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
 ("Q#") {return new Symbol(sym.Suma, yychar, yyline, yytext());} 
 ("Q?") {return new Symbol(sym.Resta, yychar, yyline, yytext());} 
 ("Q@") {return new Symbol(sym.Multiplicacion, yychar, yyline, yytext());}  
 ("Q-") {return new Symbol(sym.Division, yychar, yyline, yytext());}
-(">>") {return new Symbol(sym.Asignacion, yychar, yyline, yytext());}  
-("QNEL"){return new Symbol(sym. No_Igual_a, yychar, yyline, yytext());} 
-("Q>>"){return new Symbol(sym. Igual_a, yychar, yyline, yytext());} 
+(">>") {return new Symbol(sym.Asignacion, yychar, yyline, yytext());}
 ("%%") {return new Symbol(sym.Porcentaje, yychar, yyline, yytext());}  
-("Qmas"){return new Symbol(sym.Operador_Y, yychar, yyline, yytext());} 
-("Qopc"){return new Symbol(sym.Operador_O, yychar, yyline, yytext());} 
-("Q<"){return new Symbol(sym.Menor_que, yychar, yyline, yytext());}  
-("Q>"){return new Symbol(sym.Mayor_que, yychar, yyline, yytext());}  
-("Q#<"){return new Symbol(sym.Menor_que_o_igual, yychar, yyline, yytext());}  
-("Q#>"){return new Symbol(sym.Mayor_que_o_igual, yychar, yyline, yytext());} 
+("QNEL"|"Q>>"|"Qmas"|"Qopc"|"Q<"|"Q>","Q#<"|"Q#>") {return new Symbol(sym.Op_Relacional, yychar, yyline, yytext());} //Op_relacionales
+("[") {return new Symbol(sym.Corchete_a, yychay, yyline, yytext());}
+("]") {return new Symbol(sym.Corchete_c, yychay, yyline, yytext());}
+("(") {return new Symbol(sym.Parentesis_a, yychay, yyline, yytext());}
+(")") {return new Symbol(sym.Parentesis_c, yychay, yyline, yytext());}
 ("Q+") {return new Symbol(sym.Concatenar, yychar, yyline, yytext());}  
 ("QC-Declaraciones") {return new Symbol(sym.Declaracion, yychar, yyline, yytext());}  
 ("Quetzal") {return new Symbol(sym.Entero, yychar, yyline, yytext());}  
