@@ -38,6 +38,8 @@ espacio=[ ,\t,\r,\n]+
 ("\"") {return new Symbol(sym.Comillas, yychar, yyline, yytext());}
 (",") {return new Symbol(sym.Coma, yychar, yyline, yytext());}
 (";") {return new Symbol(sym.PuntoComa, yychar, yyline, yytext());}
+("{") {return new Symbol(sym.Llave_a, yychar, yyline, yytext());}
+("}") {return new Symbol(sym.Llave_c, yychar, yyline, yytext());}
 ("Q+") {return new Symbol(sym.Concatenar, yychar, yyline, yytext());}  
 ("QC-Declaraciones") {return new Symbol(sym.Declaracion, yychar, yyline, yytext());}  
 ("Quetzal") {return new Symbol(sym.Entero, yychar, yyline, yytext());}  
