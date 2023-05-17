@@ -16,39 +16,48 @@ parser code
 :};
 
 terminal tApertura, Declaracion, Entero, Decimal, Flotante, vString, Boleano,
+        tCierre, Corchete_a, Corchete_c, Op_Relacional, IfElse, FinIf
+non terminal INICIO, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, BLOQUE_COD,
+            ELSE, CIERREIF, IMPRIMIR
+
+/*_____DECLARAR VARIABLES_____*/
+INICIO ::= 
+        COMIENZO VARIABLE CERRAR
+;
+COMIENZO ::= 
+        tApertura Declaracion DosPuntos
+;
+VARIABLE ::= 
+        Entero |
+        Decimal | 
+        Flotante |
+        vString |
+        Boleano |
+;
+CERRAR ::= 
+        Identificador tCierre |
         tCierre
-non terminal INICIO, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION,
-            BLOQUE_COD
-
-/*DECLARAR VARIABLES*/
-INICIO ::= COMIENZO VARIABLE CERRAR
-;
-COMIENZO ::= tApertura Declaracion DosPuntos
-;
-VARIABLE ::= Entero 
-        | Decimal 
-        | Flotante
-        | vString
-        | Boleano
-;
-CERRAR ::= Identificador tCierre 
-        | tCierre
 ;
 
-
-/*DECLARAR CICLO IF, IF ELSE, IF ELSE IF*/
-IF ::= tApertura QcPaso dosPuntos SENTENCIA_RELACION tCierre BLOQUE_COD
-
-SENTENCIA_RELACION ::= corchete_ap Identificador Op_Relacional Identificador corchete_ci
-                | corchete_ap Identificador Op_Relacional digito corchete_ci
-
-BLOQUE_COD ::= IMPRIMIR CIERREIF
-              | IMPRIMIR ELSE 
-
-ELSE ::= tApertura QcPasopPaso tCierre BLOQUE_COD CIERREIF
-        | tApertura QcPasopPaso tCierre IF
-
-CIERREIF ::= tApertura QcPasoFin tCierre
+/*______DECLARAR CICLO IF, IF ELSE, IF ELSE IF_____*/
+IF ::= 
+    tApertura If DosPuntos SENTENCIA_RELACION tCierre BLOQUE_COD
+;
+SENTENCIA_RELACION ::= 
+        Corchete_a Identificador Op_Relacional Identificador Corchete_c |
+        Corchete_a Identificador Op_Relacional digito Corchete_c
+;
+BLOQUE_COD ::= 
+            IMPRIMIR CIERREIF |
+            IMPRIMIR ELSE
+;
+ELSE ::= 
+        tApertura IfElse tCierre BLOQUE_COD |
+        tApertura IfElse tCierre IF
+;
+CIERREIF ::= 
+        tApertura FinIf tCierre
+;
 
 /*DECLARAR CICLO WHILE*/
 CICLO_DO_WHILE ::= tApertura QC_Repite dosPuntos SEN_REL tCierre COD_W IMPRIMIR CIERRE_WHILE
