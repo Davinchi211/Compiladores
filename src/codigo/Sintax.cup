@@ -15,5 +15,78 @@ parser code
 }
 :};
 
-terminal
-non terminal
+terminal /*palabras definidas en lexico*/
+non terminal DECLARACION_VAR, IMPRIMIR, IF, cIF_ELSE, cIF_ELSE_IF, CICLO_WHILE, 
+            CICLO_FOR, CICLO_DO_WHILE, METODO, CLASE, ATRIBUTO, MAIN, INICIO, CIERRE
+
+
+start with CLASE;
+
+_________________________________
+//------declarar una clase-----//
+CLASE ::= INICIO BLOQUE_CODIGO CIERRE
+
+INICIO ::= tApertura tClase Identificador tCierre
+
+BLOQUE_CODIGO ::= ATRIBUTO CONSTRUCTOR
+
+ATRIBUTO ::= tApertura DECLARACION_VAR Variable Identificador tCierre
+
+CONSTRUCTOR ::= 
+
+CIERRE ::= tApertura tClase tCierre
+
+________________________________________________________
+//------declarar ciclo if / if else / if else if------//
+
+IF ::= tApertura QcPaso dosPuntos SENTENCIA_RELACION tCierre BLOQUE_COD
+
+SENTENCIA_RELACION ::= corchete_ap Identificador Op_Relacional Identificador corchete_ci
+                | corchete_ap Identificador Op_Relacional digito corchete_ci
+
+BLOQUE_COD ::= IMPRIMIR CIERREIF
+              | IMPRIMIR ELSE 
+
+ELSE ::= tApertura QcPasopPaso tCierre BLOQUE_COD CIERREIF
+        | tApertura QcPasopPaso tCierre IF
+
+CIERREIF ::= tApertura QcPasoFin tCierre
+______________________________________
+//------declarar ciclo while------//
+
+CICLO_DO_WHILE ::= tApertura QC_Repite dosPuntos SEN_REL tCierre COD_W IMPRIMIR CIERRE_WHILE
+
+SEN_REL ::= Identificador Op_Relacional digito 
+        | Identificador Op_Relacional Identificador 
+
+CODIGO ::= Identificador tAsignacion digito OPERACION_ARIT digito 
+        | Identificador tAsignacion digito OPERACION_ARIT Identificador 
+
+CIERRE_WHILE ::= tApertura QC_Repite_Fin tCierre
+___________________________
+//-----declarar for------//
+
+CICLO_FOR ::= tApertura QC_Variar dosPuntos IN_FIN tCierre CODIGO IMPRIMIR CIERRE_FOR
+
+IN_FIN ::= Identificador tDesde dosPuntos digito tFin dosPuntos digito tPaso dosPuntos digito
+
+CODIGO ::= Identificador tAsignacion digito OPERACION_ARIT digito 
+        | Identificador tAsignacion digito OPERACION_ARIT Identificador 
+
+CIERRE_FOR ::= tApertura QC_Variar_Fin tCierre
+_______________________________
+//-----declarar do while-----//
+
+CICLO_DO_WHILE ::= INICIO BLOQ CONDICION2 FINDW
+
+INICIO ::= tApertura QC_Chispudo tCierre
+
+CODIGO ::= Identificador tAsignacion digito OPERACION_ARIT digito 
+        | Identificador tAsignacion digito OPERACION_ARIT Identificador 
+
+CONDICION2 ::= tApertura QC_Pior dosPuntos SENTENCIA_RELACION
+
+SENTENCIA_RELACION ::= corchete_ap Identificador Op_Relacional Identificador corchete_ci
+                | corchete_ap Identificador Op_Relacional digito corchete_ci
+
+FINDW ::= tApertura QC_Chispudo_Fin tCierre

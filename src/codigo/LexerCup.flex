@@ -45,12 +45,8 @@ espacio=[ ,\t,\r,\n]+
 ("Choca") {return new Symbol(sym.Flotante, yychar, yyline, yytext());}  
 ("Pisto") {return new Symbol(sym.vString, yychar, yyline, yytext());}  
 ("Len") {return new Symbol(sym.Boleano, yychar, yyline, yytext());}  
-("SinPisto") {return new Symbol(sym.funcion, yychar, yyline, yytext());}  
-("Regalado") {return new Symbol(sym.Publico, yychar, yyline, yytext());}  
-("Reservado") {return new Symbol(sym.Privado, yychar, yyline, yytext());} 
-("Tapado") {return new Symbol(sym.Protegido, yychar, yyline, yytext());} 
-("Quieto") {return new Symbol(sym.Mismo_tipo, yychar, yyline, yytext());}  
-("Acabado") {return new Symbol(sym.Unico, yychar, yyline, yytext());}  
+("SinPisto") {return new Symbol(sym.funcion, yychar, yyline, yytext());}
+("Regalado"|"Reservado","Tapado"|"Quieto"|"Acabado") {return new Symbol(sym.Modificadores_Acceso, yychar, yyline, yytext());}  
 ("QC-salida:") {return new Symbol(sym.Salida, yychar, yyline, yytext());} 
 ("QC-paso:") {return new Symbol(sym.If, yychar, yyline, yytext());} 
 ("QC-paso-Fin")  {return new Symbol(sym.FinIf, yychar, yyline, yytext());} 
