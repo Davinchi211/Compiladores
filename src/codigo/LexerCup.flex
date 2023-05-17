@@ -19,6 +19,9 @@ espacio=[ ,\t,\r,\n]+
     }
 %}
 %%
+
+/*Ignorar espacios*/
+{espacio} {}
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());} //agregue identificador, numero, error
 ("(-"{D}+")")| {D}+ {return new Symbol(sym.Numero, yychar, yyline, yytext());}
 . {return new Symbol(sym.Error, yychar, yyline, yytext());}
