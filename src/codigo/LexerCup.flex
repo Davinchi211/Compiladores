@@ -22,7 +22,7 @@ espacio=[ ,\t,\r,\n]+
 
 {espacio} {/*Ignore*/} /*Ignorar espacios*/
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
-("(-"{D}+")")| {D}+ {return new Symbol(sym.Numero, yychar, yyline, yytext());}
+("(-"{D}+")")| {D}+ {return new Symbol(sym.digito, yychar, yyline, yytext());}
 . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
 ("Q#") {return new Symbol(sym.Suma, yychar, yyline, yytext());} 
 ("Q?") {return new Symbol(sym.Resta, yychar, yyline, yytext());} 
