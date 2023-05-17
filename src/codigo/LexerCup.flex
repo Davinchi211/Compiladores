@@ -60,6 +60,7 @@ espacio=[ ,\t,\r,\n]+
 ("paso")  {return new Symbol(sym.pasoF, yychar, yyline, yytext());}
 ("QC-Variar-Fin")  {return new Symbol(sym.forFin, yychar, yyline, yytext());} 
 ("QC-Chispudo")  {return new Symbol(sym.DoWhile, yychar, yyline, yytext());} 
+("QC-Pior")  {return new Symbol(sym.CumpleBloque, yychar, yyline, yytext());} 
 ("QC-Chispudo-Fin")  {return new Symbol(sym.DoWhileFin, yychar, yyline, yytext());} 
 ("Qpistudo") {return new Symbol(sym.TipoEntero, yychar, yyline, yytext());} 
 ("tieneCasaca") {return new Symbol(sym.Verdadero, yychar, yyline, yytext());} 

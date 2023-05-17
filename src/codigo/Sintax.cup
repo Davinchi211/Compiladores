@@ -21,12 +21,11 @@ terminal Suma, Resta, Multiplicacion, Division, Asignacion, Porcentaje, Op_Relac
     Modificadores_Acceso, Salida, If, FinIf, IfElse, While, hastaW, FinWhile, For,
     desdeF, finF, pasoF, forFin, DoWhile, DoWhileFin, TipoEntero, Verdadero, TipoPisto,
     TipoCentavo, TipoLen, LlamaFuncion, tApertura, tCierre, DosPuntos, Identificador,
-    digito
-        
+    digito, CumpleBloque; 
 non terminal INICIO, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, COD_IF,
             ELSE, CIERREIF, IMPRIMIR, CICLO_WHILE, SEN_REL, CIERRE_WHILE, COD_WHILE,
-            SEN_FOR, COD_FOR, CIERRE_FOR
-            
+            SEN_FOR, COD_FOR, CIERRE_FOR, DO_WHILE, INI_DOWHILE,CONDICION2,
+            FINDW, SENT_DW
 
 /*_____DECLARAR VARIABLES_____*/
 INICIO ::= 
@@ -76,14 +75,10 @@ SEN_REL ::=
         hastaW Corchete_a Identificador Op_Relacional Identificador Corchete_c
 ;
 COD_WHILE ::= 
-        Identificador Asignacion digito Suma digito |
-        Identificador Asignacion digito Resta digito |
-        Identificador Asignacion digito Multiplicacion digito |
-        Identificador Asignacion digito Division digito |
-        Identificador Asignacion digito Suma Identificador |
-        Identificador Asignacion digito Resta Identificador |
-        Identificador Asignacion digito Multiplicacion Identificador |
-        Identificador Asignacion digito Division Identificador
+        Identificador Asignacion Identificador Suma digito |
+        Identificador Asignacion Identificador Resta digito |
+        Identificador Asignacion Identificador Multiplicacion digito |
+        Identificador Asignacion Identificador Division digito
 ;
 CIERRE_WHILE ::= 
             tApertura FinWhile tCierre
@@ -109,20 +104,21 @@ CIERRE_FOR ::=
             tApertura forFin tCierre
 ;
 
-/*DECLARAR DO WHILE*/
-CICLO_DO_WHILE ::= INICIO BLOQ CONDICION2 FINDW
-
-INICIO ::= tApertura QC_Chispudo tCierre
-
-CODIGO ::= Identificador tAsignacion digito OPERACION_ARIT digito 
-        | Identificador tAsignacion digito OPERACION_ARIT Identificador 
-
-CONDICION2 ::= tApertura QC_Pior dosPuntos SENTENCIA_RELACION
-
-SENTENCIA_RELACION ::= corchete_ap Identificador Op_Relacional Identificador corchete_ci
-                | corchete_ap Identificador Op_Relacional digito corchete_ci
-
-FINDW ::= tApertura QC_Chispudo_Fin tCierre
+/*___________DECLARAR DO WHILE___________*/
+DO_WHILE ::= 
+            INI_DOWHILE COD_WHILE CONDICION2 FINDW
+;
+INI_DOWHILE ::= 
+            tApertura DoWhile tCierre
+;
+CONDICION2 ::= 
+            tApertura CumpleBloque DosPuntos SENT_DW
+;
+SENT_DW ::= 
+            Corchete_a Identificador Op_Relacional Identificador Corchete_c | 
+            Corchete_a Identificador Op_Relacional digito Corchete_c
+;
+FINDW ::= tApertura DoWhileFin tCierre
 
 /*DECLARAR UNA CLASE*/
 CLASE ::= INICIO BLOQUE_CODIGO CIERRE
