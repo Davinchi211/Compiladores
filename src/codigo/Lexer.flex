@@ -11,12 +11,10 @@ espacio=[ ,\t,\r]+
 %}
 %%
 
+( "," )  {lexeme=yytext(); return Coma;}
 {espacio} {/*Ignore*/}
 ( "//"(.)*) {/*Ignore*/}
 ( "\n" ) {return Linea;}
-{L}({L}|{D})* {lexeme=yytext(); return Identificador;}
-("(-"{D}+")")| {D}+ {lexeme=yytext(); return digito;}
-. {lexeme=yytext(); return ERROR;}
 ( "Q#" ) {lexeme=yytext(); return Suma;}
 ( "Q?" ) {lexeme=yytext(); return Resta;}
 ( "Q@" ) {lexeme=yytext(); return Multiplicacion;}
@@ -29,7 +27,6 @@ espacio=[ ,\t,\r]+
 ( "(" )  {lexeme=yytext(); return Parentesis_a;}
 ( ")" )  {lexeme=yytext(); return Parentesis_c;}
 ( "\"" ) {lexeme=yytext(); return Comillas;}
-( "," )  {lexeme=yytext(); return Coma;}
 ( ";" )  {lexeme=yytext(); return PuntoComa;}
 ( "{" )  {lexeme=yytext(); return Llave_a;}
 ( "}" )  {lexeme=yytext(); return Llave_c;}
@@ -71,3 +68,6 @@ espacio=[ ,\t,\r]+
 ( "<" ) {lexeme=yytext(); return tApertura;}
 ( ">" ) {lexeme=yytext(); return tCierre;}
 ( ":" ) {lexeme=yytext(); return DosPuntos;}
+{L}({L}|{D})* {lexeme=yytext(); return Identificador;}
+("(-"{D}+")")| {D}+ {lexeme=yytext(); return digito;}
+. {lexeme=yytext(); return ERROR;}

@@ -19,11 +19,9 @@ espacio=[ ,\t,\r,\n]+
     }
 %}
 %%
+(",") {return new Symbol(sym.Coma, yychar, yyline, yytext());}
 {espacio} {/*Ignore*/}
 ("//"(.)*) {/*Ignore*/}
-{L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
-("(-"{D}+")")| {D}+ {return new Symbol(sym.digito, yychar, yyline, yytext());}
-. {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
 ("Q#") {return new Symbol(sym.Suma, yychar, yyline, yytext());} 
 ("Q?") {return new Symbol(sym.Resta, yychar, yyline, yytext());} 
 ("Q@") {return new Symbol(sym.Multiplicacion, yychar, yyline, yytext());}  
@@ -36,7 +34,6 @@ espacio=[ ,\t,\r,\n]+
 ("(") {return new Symbol(sym.Parentesis_a, yychar, yyline, yytext());}
 (")") {return new Symbol(sym.Parentesis_c, yychar, yyline, yytext());}
 ("\"") {return new Symbol(sym.Comillas, yychar, yyline, yytext());}
-(",") {return new Symbol(sym.Coma, yychar, yyline, yytext());}
 (";") {return new Symbol(sym.PuntoComa, yychar, yyline, yytext());}
 ("{") {return new Symbol(sym.Llave_a, yychar, yyline, yytext());}
 ("}") {return new Symbol(sym.Llave_c, yychar, yyline, yytext());}
@@ -78,3 +75,6 @@ espacio=[ ,\t,\r,\n]+
 ("<") {return new Symbol(sym.tApertura, yychar, yyline, yytext());}
 (">") {return new Symbol(sym.tCierre, yychar, yyline, yytext());}
 (":") {return new Symbol(sym.DosPuntos, yychar, yyline, yytext());}
+{L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
+("(-"{D}+")")| {D}+ {return new Symbol(sym.digito, yychar, yyline, yytext());}
+. {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
