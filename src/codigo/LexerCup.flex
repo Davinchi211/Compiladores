@@ -75,6 +75,6 @@ espacio=[ ,\t,\r,\n]+
 ("QC-Fabricar") {return new Symbol(sym.Constructor, yychar, yyline, yytext());}
 ("QC-Mio") {return new Symbol(sym.Atributo, yychar, yyline, yytext());}
 ("QC-Fabricar-Fin") {return new Symbol(sym.ConstructorFin, yychar, yyline, yytext());}
-("<") {return new Symbol(sym.tApertura, yychar, yyline, yytext());} 
-(">"){return new Symbol(sym.tCierre, yychar, yyline, yytext());} 
+("<") {return new Symbol(sym.tApertura, yychar, yyline, yytext());}
+(">"){return new Symbol(sym.tCierre, yychar, yyline, yytext());}
 (":"){return new Symbol(sym.DosPuntos, yychar, yyline, yytext());}
