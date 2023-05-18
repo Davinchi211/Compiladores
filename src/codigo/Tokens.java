@@ -4,7 +4,6 @@ package codigo;
  * @author Guillermo
  */
 public enum Tokens {
-    ERROR,
     Linea,
     Identificador,
     digito,
@@ -61,5 +60,6 @@ public enum Tokens {
     ConstructorFin,
     tApertura,
     tCierre,
-    DosPuntos
+    DosPuntos,
+    error
 }

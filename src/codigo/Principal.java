@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package codigo;
 
 import java.io.File;
@@ -27,7 +32,7 @@ public class Principal {
         }
         Files.move(
                 Paths.get("D:/NetBeansProjects/CompiladoresP/sym.java"), 
-                Paths.get("D:/Documentos/NetBeansProjects/CompiladoresP/src/codigo/sym.java")
+                Paths.get("D:/NetBeansProjects/CompiladoresP/src/codigo/sym.java")
         );
         Path rutaSin = Paths.get("D:/NetBeansProjects/CompiladoresP/src/codigo/Sintax.java");
         if (Files.exists(rutaSin)) {

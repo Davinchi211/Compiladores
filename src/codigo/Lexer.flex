@@ -70,4 +70,4 @@ espacio=[ ,\t,\r]+
 ( ":" ) {lexeme=yytext(); return DosPuntos;}
 {L}({L}|{D})* {lexeme=yytext(); return Identificador;}
 ("(-"{D}+")")| {D}+ {lexeme=yytext(); return digito;}
-. {lexeme=yytext(); return ERROR;}
+. {return error;}
