@@ -4,6 +4,10 @@ package codigo;
  * @author Guillermo
  */
 public enum Tokens {
+    ERROR,
+    Linea,
+    Identificador,
+    digito,
     Suma,
     Resta,
     Multiplicacion,

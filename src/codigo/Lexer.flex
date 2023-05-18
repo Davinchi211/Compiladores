@@ -11,16 +11,12 @@ espacio=[ ,\t,\r]+
 %}
 %%
 
-/* Espacios en blanco */
 {espacio} {/*Ignore*/}
-
-/* Comentarios */
 ( "//"(.)* ) {/*Ignore*/}
-
-/* Salto de linea */
 ( "\n" ) {return Linea;}
-
-/* Comillas */
+{L}({L}|{D})* {lexeme=yytext(); return Identificador;}
+("(-"{D}+")")| {D}+ {lexeme=yytext(); return digito;}
+. {lexeme=yytext(); return ERROR;}
 ( "\"" ) {lexeme=yytext(); return Comillas;}
 ( "Q#" ) {lexeme=yytext(); return Suma;}
 ( "Q?" ) {lexeme=yytext(); return Resta;}
@@ -39,11 +35,11 @@ espacio=[ ,\t,\r]+
 ( "QC-salida") {lexeme=yytext(); return salida;}
 ( "QC-paso:" ) {lexeme=yytext(); return If;}
 ( "QC-paso-Fin" ) {lexeme=yytext(); return FinIf;}
-( "QC-paso-porque-paso" ) {lexeme=yytext(); return ifElse;}
+( "QC-paso-porque-paso" ) {lexeme=yytext(); return IfElse;}
 ( "QC-Repite" ) {lexeme=yytext(); return While;}
 ( "hastaQ" ) {lexeme=yytext(); return hastaW;}
 ( "QC-Repite-Fin" ) {lexeme=yytext(); return FinWhile;}
-( "QC-variar" ) {lexeme=yytext(); return For;}
+( "QC-Variar" ) {lexeme=yytext(); return For;}
 ( "desde" ) {lexeme=yytext(); return desdeF;}
 ( "QC-Variar-Fin" ) {lexeme=yytext(); return forFin;}
 ( "QC-Chispudo" ) {lexeme=yytext(); return DoWhile;}
@@ -60,13 +56,12 @@ espacio=[ ,\t,\r]+
 ( "QC-Fabricar" ) {lexeme=yytext(); return Constructor;}
 ( "QC-Mio" ) {lexeme=yytext(); return Atributo;}
 ( "QC-Fabricar-Fin") {lexeme=yytext(); return ConstrutorFin;}
-("QNEL"|"Q>>"|"Qmas"|"Qopc"|"Q<"|"Q>","Q#<"|"Q#>")  {lexeme=yytext(); return Op_Relacional;}
-("Regalado"|"Reservado","Tapado"|"Quieto"|"Acabado") {lexeme=yytext(); return Modificadores_Acceso;}
+("QNEL"|"Q>>"|"Qmas"|"Qopc"|"Q<"|"Q>"|"Q#<"|"Q#>")  {lexeme=yytext(); return Op_Relacional;}
+("Regalado"|"Reservado"|"Tapado"|"Quieto"|"Acabado") {lexeme=yytext(); return Modificadores_Acceso;}
 ( "[" )  {lexeme=yytext(); return Corchete_a;}
 ( "]" )  {lexeme=yytext(); return Corchete_c;}
 ( "(" )  {lexeme=yytext(); return Parentesis_a;}
 ( ")" )  {lexeme=yytext(); return Parentesis_c;}
-("\"" )  {lexeme=yytext(); return Comillas;}
 ( "," )  {lexeme=yytext(); return Coma;}
 ( ";" )  {lexeme=yytext(); return PuntoComa;}
 ( "{" )  {lexeme=yytext(); return Llave_a;}
