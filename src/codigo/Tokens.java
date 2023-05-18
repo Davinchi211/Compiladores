@@ -8,7 +8,7 @@ public enum Tokens {  //Agregar nuevos tokens agregados en flex y flexCup
     Resta,
     Multiplicacion,
     Division,
-    Asignacion, 
+    Asignacion,
     Op_Relacional,
     Porcentaje,
     Corchete_a,

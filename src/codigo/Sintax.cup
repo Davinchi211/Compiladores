@@ -29,8 +29,28 @@ non terminal VARIABLES, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, COD_
             FINDW, SENT_DW, INI_CLASS, CLASE, COD_CLASE, CIERRE_CLASE, ATRIBUTO, 
             CONSTRUCTOR, PARAMETROS, COD_CONST, CIERRE_ATRIB, METODO, INI_METODO,
             COD_METODO, REINT, BLOQUE_METODO, BLOQ2_METOD, ARGUMENTO, ASIG,
-            DECL2, CADENA, MAIN;
+            DECL2, CADENA, MAIN, IMPRIMIR, INI_IMP, VALOR, FIN_IMP, VALOR2;
 
+/*imprimir*/
+
+IMPRIMIR ::= 
+        INI_IMP VALOR FIN_IMP |
+        INI_IMP VALOR2 FIN_IMP
+;
+INI_IMP ::= 
+        tApertura Salida DosPuntos
+;
+VALOR ::=
+        Comillas CADENA Comillas |
+        Comillas CADENA Comillas Concatenar Identificador |
+        digito Concatenar Comillas CADENA Comillas Concatenar Identificador Comillas CADENA Comillas Concatenar Identificador |
+;
+VALOR2 ::=
+        Comillas CADENA Comillas Concatenar Identificador Concatenar VALOR2
+;
+FIN_IMP ::=
+        tCierre
+;
 /*€€€€€€€  variables €€€€€€€*/
 VARIABLES ::= 
         COMIENZO VARIABLE CERRAR |
@@ -49,7 +69,8 @@ DECL2 ::=
         vString Identificador Asignacion Comillas CADENA Comillas tCierre
 ;
 CADENA ::= 
-        | Identificador CADENA
+        | Identificador CADENA |
+        Identificador
 ;
 CERRAR ::= 
         Identificador tCierre |

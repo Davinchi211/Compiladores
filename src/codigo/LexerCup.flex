@@ -19,8 +19,8 @@ espacio=[ ,\t,\r,\n]+
     }
 %}
 %%
-
-{espacio} {/*Ignore*/} /*Ignorar espacios*/
+{espacio} {/*Ignore*/}
+("//"(.)*) {/*Ignore*/}
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
 ("(-"{D}+")")| {D}+ {return new Symbol(sym.digito, yychar, yyline, yytext());}
 . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}

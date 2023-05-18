@@ -39,7 +39,7 @@ public class Principal {
         }
         Files.move(
                 Paths.get("D:/NetBeansProjects/CompiladoresP/Sintax.java"),
-                Paths.get("D:/NetBeansProjects/CompiladoresP/src/codigo/.java")
+                Paths.get("D:/NetBeansProjects/CompiladoresP/src/codigo/Sintax.java")
         );
     }
 }
