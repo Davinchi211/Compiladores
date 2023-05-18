@@ -3,16 +3,16 @@ package codigo;
  *
  * @author Guillermo
  */
-public enum Tokens {  //Agregar nuevos tokens agregados en flex y flexCup
+public enum Tokens {
     Suma,
     Resta,
     Multiplicacion,
     Division,
-    Asignacion,
+    Asignacion, 
     Op_Relacional,
     Porcentaje,
     Corchete_a,
-    Corchete_b,
+    Corchete_c,
     Parentesis_a,
     Parentesis_c,
     Comillas,
