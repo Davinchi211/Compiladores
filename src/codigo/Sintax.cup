@@ -29,7 +29,8 @@ non terminal VARIABLES, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, COD_
             FINDW, SENT_DW, INI_CLASS, CLASE, COD_CLASE, CIERRE_CLASE, ATRIBUTO, 
             CONSTRUCTOR, PARAMETROS, COD_CONST, CIERRE_ATRIB, METODO, INI_METODO,
             COD_METODO, REINT, BLOQUE_METODO, BLOQ2_METOD, ARGUMENTO, ASIG,
-            DECL2, CADENA, MAIN, IMPRIMIR, INI_IMP, VALOR, FIN_IMP, VALOR2;
+            DECL2, CADENA, MAIN, INI_IMP, VALOR, FIN_IMP, VALOR2, BLOQUE_COD,
+            CICLO_FOR, SENT_METODO, ARGUMENTO_V;
 
 /*imprimir*/
 
@@ -51,7 +52,7 @@ VALOR2 ::=
 FIN_IMP ::=
         tCierre
 ;
-/*€€€€€€€  variables €€€€€€€*/
+/*vriables*/
 VARIABLES ::= 
         COMIENZO VARIABLE CERRAR |
         COMIENZO DECL2 tCierre
@@ -77,7 +78,7 @@ CERRAR ::=
         tCierre
 ;
 
-/*€€€€€€ if, if else, if else if €€€€€€*/
+/* if, if else, if else if */
 
 IF ::= 
     tApertura If DosPuntos SENTENCIA_RELACION tCierre BLOQUE_COD
@@ -98,7 +99,7 @@ CIERREIF ::=
         tApertura FinIf tCierre
 ;
 
-/*€€€€€€€ while €€€€€€€*/
+/* while */
 
 CICLO_WHILE ::= 
     tApertura While DosPuntos SEN_REL tCierre COD_WHILE IMPRIMIR CIERRE_WHILE
@@ -117,7 +118,7 @@ CIERRE_WHILE ::=
             tApertura FinWhile tCierre
 ;
 
-/*€€€€€€ for €€€€€€€*/
+/* for */
 
 CICLO_FOR ::= 
            tApertura For DosPuntos SEN_FOR tCierre COD_FOR IMPRIMIR CIERRE_FOR
@@ -139,7 +140,7 @@ CIERRE_FOR ::=
             tApertura forFin tCierre
 ;
 
-/*€€€€€€€ do while €€€€€€€*/
+/*do while*/
 
 DO_WHILE ::= 
             INI_DOWHILE COD_WHILE CONDICION2 FINDW
@@ -158,7 +159,7 @@ FINDW ::=
         tApertura DoWhileFin tCierre
 ;
 
-/*€€€€€€ clase €€€€€€€*/
+/*clase */
 
 CLASE ::= 
         INI_CLASS COD_CLASE CIERRE_CLASE
@@ -199,7 +200,7 @@ CIERRE_CLASE ::=
             tApertura ClaseFin tCierre
 ;
 
-/*€€€€€€ metodo €€€€€€*/
+/*metodo*/
 
 METODO ::= 
         INI_METODO REINT
