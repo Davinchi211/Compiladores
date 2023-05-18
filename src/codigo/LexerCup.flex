@@ -30,7 +30,7 @@ espacio=[ ,\t,\r,\n]+
 ("Q-") {return new Symbol(sym.Division, yychar, yyline, yytext());}
 (">>") {return new Symbol(sym.Asignacion, yychar, yyline, yytext());}
 ("%%") {return new Symbol(sym.Porcentaje, yychar, yyline, yytext());}  
-("QNEL"|"Q>>"|"Qmas"|"Qopc"|"Q<"|"Q>"|"Q#<"|"Q#>") {return new Symbol(sym.Op_Relacional, yychar, yyline, yytext());}
+( "QNEL" | "Q>>" | "Qmas" | "Qopc" | "Q<" | "Q>" | "Q#<" | "Q#>" ) {return new Symbol(sym.Op_Relacional, yychar, yyline, yytext());}
 ("[") {return new Symbol(sym.Corchete_a, yychar, yyline, yytext());}
 ("]") {return new Symbol(sym.Corchete_c, yychar, yyline, yytext());}
 ("(") {return new Symbol(sym.Parentesis_a, yychar, yyline, yytext());}
@@ -48,7 +48,7 @@ espacio=[ ,\t,\r,\n]+
 ("Pisto") {return new Symbol(sym.vString, yychar, yyline, yytext());}  
 ("Len") {return new Symbol(sym.Boleano, yychar, yyline, yytext());}  
 ("SinPisto") {return new Symbol(sym.funcion, yychar, yyline, yytext());}
-("Regalado"|"Reservado"|"Tapado"|"Quieto"|"Acabado") {return new Symbol(sym.Modificadores_Acceso, yychar, yyline, yytext());}  
+( "Regalado" | "Reservado" | "Tapado" | "Quieto" | "Acabado" ) {return new Symbol(sym.Modificadores_Acceso, yychar, yyline, yytext());}  
 ("QC-salida:") {return new Symbol(sym.Salida, yychar, yyline, yytext());} 
 ("QC-paso:") {return new Symbol(sym.If, yychar, yyline, yytext());} 
 ("QC-paso-Fin")  {return new Symbol(sym.FinIf, yychar, yyline, yytext());} 
