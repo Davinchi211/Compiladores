@@ -5,7 +5,7 @@ import static codigo.Tokens.*;
 %type Tokens
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ ,\t,\r,\n]+
+espacio=[ ,\t,\r]+
 %{
     public String lexeme;
 %}
@@ -19,13 +19,15 @@ espacio=[ ,\t,\r,\n]+
 ( "\n" ) {return Linea;}
 /* Comillas */
 ( "\"" ) {lexeme=yytext(); return Comillas;}
-
+{L}({L}|{D})* {lexeme=yytext(); return Identificador}
+("(-"{D}+")")| {D}+ {lexeme=yytext(); return digito}
+. {lexeme=yytext(); return ERROR}
 ( Q# ) {lexeme=yytext(); return Suma;}
 ( Q? ) {lexeme=yytext(); return Resta;}
 ( Q@ ) {lexeme=yytext(); return Multiplicacion;}
 ( Q- ) {lexeme=yytext(); return Division;}
 ( >> ) {lexeme=yytext(); return Asignacion;}
-( %% ) {lexeme=yytext(); return Porcentaje;}
+( %% ) {lexeme=yytext(); return Porcentaje;} 
 ( Q+ ) {lexeme=yytext(); return Concatenar;}
 ( QC-Declaraciones) {lexeme=yytext(); return Declaracion;}
 ( Quetzal ) {lexeme=yytext(); return Entero;}
@@ -58,5 +60,5 @@ espacio=[ ,\t,\r,\n]+
 ( QC-Fabricar ) {lexeme=yytext(); return Constructor;}
 ( QC-Mio ) {lexeme=yytext(); return Atributo;}
 ( QC-Fabricar-Fin) {lexeme=yytext(); return ConstrutorFin;}
-("QNEL"|"Q>>"|"Qmas"|"Qopc"|"Q<"|"Q>","Q#<"|"Q#>")  {lexeme=yytext(); return op_Relacional;}
-("Regalado"|"Reservado","Tapado"|"Quieto"|"Acabado") {lexeme=yytext(); return Modificadores_Acceso;}
+("QNEL"|"Q>>"|"Qmas"|"Qopc"|"Q<"|"Q>"|"Q#<"|"Q#>")  {lexeme=yytext(); return Op_Relacional;}
+("Regalado"|"Reservado"|"Tapado"|"Quieto"|"Acabado") {lexeme=yytext(); return Modificadores_Acceso;}
