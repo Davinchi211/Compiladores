@@ -25,7 +25,9 @@ terminal Suma, Resta, Multiplicacion, Division, Asignacion, Porcentaje, Op_Relac
     Llave_a, Llave_c; 
 non terminal IMPRIMIR, INI_IMP, VALOR, FIN_IMP, VALOR2, CADENA, DEC_VAR, VARIABLES,
     IF, SENTENCIA_RELACION, COD_IF, CIERREIF, ELSE, CICLO_WHILE, SEN_REL, COD_WHILE,
-    CIERRE_WHILE, CICLO_FOR, SEN_FOR, CIERRE_FOR, COD_FOR;
+    CIERRE_WHILE, CICLO_FOR, SEN_FOR, CIERRE_FOR, COD_FOR, DO_WHILE, INI_DOWHILE,
+    CONDICION2, FINDW, SENT_DW, CLASE, INI_CLASS, COD_CLASE, CIERRE_CLASE, METODO,
+    ATRIBUTO, CONSTRUCTOR, PARAMETROS, COD_CONST, CIERRE_ATRIB;
 
 /*imprimir*/
 
@@ -121,4 +123,61 @@ COD_FOR ::=
 ;
 CIERRE_FOR ::= 
             tApertura forFin tCierre
+;
+/*do while*/
+DO_WHILE ::= 
+            INI_DOWHILE COD_WHILE CONDICION2 FINDW
+;
+INI_DOWHILE ::= 
+            tApertura DoWhile tCierre
+;
+CONDICION2 ::= 
+            tApertura CumpleBloque DosPuntos SENT_DW
+;
+SENT_DW ::= 
+            Corchete_a Identificador Op_Relacional Identificador Corchete_c | 
+            Corchete_a Identificador Op_Relacional digito Corchete_c
+;
+FINDW ::= 
+        tApertura DoWhileFin tCierre
+;
+/*clase */
+
+CLASE ::= 
+        INI_CLASS COD_CLASE CIERRE_CLASE
+;
+INI_CLASS ::= 
+            tApertura Clase Identificador tCierre
+;
+COD_CLASE ::= | 
+        METODO |
+        ATRIBUTO CONSTRUCTOR
+;
+ATRIBUTO ::= 
+        tApertura Declaracion DosPuntos Modificadores_Acceso Entero Identificador tCierre |
+        tApertura Declaracion DosPuntos Modificadores_Acceso Decimal Identificador tCierre |
+        tApertura Declaracion DosPuntos Modificadores_Acceso Flotante Identificador tCierre |
+        tApertura Declaracion DosPuntos Modificadores_Acceso vString Identificador tCierre |
+        tApertura Declaracion DosPuntos Modificadores_Acceso Entero Identificador tCierre ATRIBUTO|
+        tApertura Declaracion DosPuntos Modificadores_Acceso Decimal Identificador tCierre ATRIBUTO|
+        tApertura Declaracion DosPuntos Modificadores_Acceso Flotante Identificador tCierre ATRIBUTO|
+        tApertura Declaracion DosPuntos Modificadores_Acceso vString Identificador tCierre ATRIBUTO
+;
+CONSTRUCTOR ::= 
+            tApertura Constructor Modificadores_Acceso Identificador DosPuntos PARAMETROS tCierre COD_CONST CIERRE_ATRIB
+;
+PARAMETROS ::= 
+            Corchete_a tApertura Declaracion DosPuntos Entero Identificador tCierre Corchete_c |
+            Corchete_a tApertura Declaracion DosPuntos Flotante Identificador tCierre Corchete_c |
+            Corchete_a tApertura Declaracion DosPuntos Decimal Identificador tCierre Corchete_c |
+            Corchete_a tApertura Declaracion DosPuntos Entero Identificador tCierre Corchete_c
+;
+COD_CONST ::=
+        tApertura Atributo Identificador Asignacion Identificador tCierre
+;
+CIERRE_ATRIB ::=
+            tApertura ConstructorFin tCierre
+;
+CIERRE_CLASE ::= 
+            tApertura ClaseFin tCierre
 ;
