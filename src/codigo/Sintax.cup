@@ -23,7 +23,9 @@ terminal Suma, Resta, Multiplicacion, Division, Asignacion, Porcentaje, Op_Relac
     TipoCentavo, TipoLen, LlamaFuncion, tApertura, tCierre, DosPuntos, Identificador,
     digito, CumpleBloque, Clase, Constructor, ClaseFin, Atributo, ConstructorFin,
     Llave_a, Llave_c; 
-non terminal IMPRIMIR, INI_IMP, VALOR, FIN_IMP, VALOR2, CADENA, DEC_VAR, VARIABLES;
+non terminal IMPRIMIR, INI_IMP, VALOR, FIN_IMP, VALOR2, CADENA, DEC_VAR, VARIABLES,
+    IF, SENTENCIA_RELACION, COD_IF, CIERREIF, ELSE, CICLO_WHILE, SEN_REL, COD_WHILE,
+    CIERRE_WHILE;
 
 /*imprimir*/
 
@@ -62,3 +64,40 @@ CADENA ::=
         Identificador | 
         Identificador CADENA
 ;    
+/*if, if else, if else if */
+IF ::= 
+    tApertura If DosPuntos SENTENCIA_RELACION tCierre COD_IF
+;
+SENTENCIA_RELACION ::= 
+        Corchete_a Identificador Op_Relacional Identificador Corchete_c |
+        Corchete_a Identificador Op_Relacional digito Corchete_c
+;
+COD_IF ::= 
+            IMPRIMIR CIERREIF |
+            IMPRIMIR ELSE
+;
+ELSE ::= 
+        tApertura IfElse tCierre COD_IF |
+        tApertura IfElse tCierre IF
+;
+CIERREIF ::= 
+        tApertura FinIf tCierre
+;
+
+/* while */
+CICLO_WHILE ::= 
+    tApertura While DosPuntos SEN_REL tCierre COD_WHILE IMPRIMIR CIERRE_WHILE
+;
+SEN_REL ::= 
+        hastaW Corchete_a Identificador Op_Relacional digito Corchete_c |
+        hastaW Corchete_a Identificador Op_Relacional Identificador Corchete_c
+;
+COD_WHILE ::= 
+        Identificador Asignacion Identificador Suma digito |
+        Identificador Asignacion Identificador Resta digito |
+        Identificador Asignacion Identificador Multiplicacion digito |
+        Identificador Asignacion Identificador Division digito
+;
+CIERRE_WHILE ::= 
+            tApertura FinWhile tCierre
+;
