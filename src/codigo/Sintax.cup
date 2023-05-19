@@ -27,7 +27,8 @@ non terminal IMPRIMIR, INI_IMP, VALOR, FIN_IMP, VALOR2, CADENA, DEC_VAR, VARIABL
     IF, SENTENCIA_RELACION, COD_IF, CIERREIF, ELSE, CICLO_WHILE, SEN_REL, COD_WHILE,
     CIERRE_WHILE, CICLO_FOR, SEN_FOR, CIERRE_FOR, COD_FOR, DO_WHILE, INI_DOWHILE,
     CONDICION2, FINDW, SENT_DW, CLASE, INI_CLASS, COD_CLASE, CIERRE_CLASE, METODO,
-    ATRIBUTO, CONSTRUCTOR, PARAMETROS, COD_CONST, CIERRE_ATRIB;
+    ATRIBUTO, CONSTRUCTOR, PARAMETROS, COD_CONST, CIERRE_ATRIB, INI_METODO, REINT,
+    SENT_METODO, ARGUMENTO, BLOQUE_METODO, BLOQ2_METOD, ARGUMENTO_V;
 
 /*imprimir*/
 
@@ -181,3 +182,41 @@ CIERRE_ATRIB ::=
 CIERRE_CLASE ::= 
             tApertura ClaseFin tCierre
 ;
+METODO ::= 
+        INI_METODO REINT
+;
+INI_METODO ::=
+            Modificadores_Acceso Modificadores_Acceso Identificador SENT_METODO
+;
+SENT_METODO ::=
+            Parentesis_a ARGUMENTO Parentesis_c BLOQUE_METODO |
+            Parentesis_a ARGUMENTO_V Parentesis_c BLOQUE_METODO
+;
+ARGUMENTO::= 
+            Entero Identificador |
+            PuntoComa Entero Identificador ARGUMENTO |
+            Decimal Identificador |
+            PuntoComa Decimal Identificador ARGUMENTO |
+            Flotante Identificador |
+            PuntoComa Flotante Identificador ARGUMENTO |
+            vString Identificador
+            PuntoComa vString Identificador ARGUMENTO
+;
+BLOQUE_METODO ::=
+                Llave_a VARIABLES BLOQ2_METOD BLOQUE_METODO |
+                Llave_a IMPRIMIR BLOQ2_METOD BLOQUE_METODO |
+                Llave_a VARIABLES IMPRIMIR BLOQ2_METOD BLOQUE_METODO
+;
+BLOQ2_METOD ::= 
+            Identificador Asignacion Identificador Suma Identificador PuntoComa |
+            Identificador Asignacion Identificador Suma digito PuntoComa |
+            Identificador Asignacion Identificador Resta Identificador PuntoComa |
+            Identificador Asignacion Identificador Resta digito PuntoComa |
+            Identificador Asignacion Identificador Multiplicacion Identificador PuntoComa |
+            Identificador Asignacion Identificador Multiplicacion digito PuntoComa |
+            Identificador Asignacion Identificador Division Identificador PuntoComa |
+            Identificador Asignacion Identificador Division Identificador PuntoComa
+;            
+REINT ::=
+        LlamaFuncion Identificador PuntoComa Llave_c
+;        
