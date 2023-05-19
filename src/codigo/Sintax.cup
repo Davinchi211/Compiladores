@@ -23,14 +23,7 @@ terminal Suma, Resta, Multiplicacion, Division, Asignacion, Porcentaje, Op_Relac
     TipoCentavo, TipoLen, LlamaFuncion, tApertura, tCierre, DosPuntos, Identificador,
     digito, CumpleBloque, Clase, Constructor, ClaseFin, Atributo, ConstructorFin,
     Llave_a, Llave_c; 
-non terminal VARIABLES, COMIENZO, VARIABLE, CERRAR, IF, SENTENCIA_RELACION, COD_IF,
-            ELSE, CIERREIF, IMPRIMIR, CICLO_WHILE, SEN_REL, CIERRE_WHILE, COD_WHILE,
-            SEN_FOR, COD_FOR, CIERRE_FOR, DO_WHILE, INI_DOWHILE,CONDICION2,
-            FINDW, SENT_DW, INI_CLASS, CLASE, COD_CLASE, CIERRE_CLASE, ATRIBUTO, 
-            CONSTRUCTOR, PARAMETROS, COD_CONST, CIERRE_ATRIB, METODO, INI_METODO,
-            COD_METODO, REINT, BLOQUE_METODO, BLOQ2_METOD, ARGUMENTO, ASIG,
-            DECL2, CADENA, INI_IMP, VALOR, FIN_IMP, VALOR2, BLOQUE_COD,
-            CICLO_FOR, SENT_METODO, ARGUMENTO_V;
+non terminal IMPRIMIR, INI_IMP, VALOR, FIN_IMP, VALOR2, CADENA, DEC_VAR, VARIABLES;
 
 /*imprimir*/
 
@@ -52,3 +45,20 @@ VALOR2 ::=
 FIN_IMP ::=
         tCierre
 ;
+VARIABLES ::= 
+        tApertura Declaracion DosPuntos DEC_VAR tCierre
+;
+DEC_VAR ::= 
+            Entero tCierre |
+            Entero Identificador|
+            Decimal tCierre |
+            Decimal Identificador|
+            Flotante tCierre |
+            Flotante Identificador|
+            Boleano tCierre |
+            vString Identificador Asignacion Comillas CADENA Comillas
+;
+CADENA ::= 
+        Identificador | 
+        Identificador CADENA
+;    
