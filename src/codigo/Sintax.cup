@@ -194,13 +194,13 @@ SENT_METODO ::=
 ;
 ARGUMENTO::= 
             Entero Identificador |
-            PuntoComa Entero Identificador ARGUMENTO |
+            Entero Identificador Coma ARGUMENTO |
             Decimal Identificador |
-            PuntoComa Decimal Identificador ARGUMENTO |
+            Decimal Identificador Coma ARGUMENTO |
             Flotante Identificador |
-            PuntoComa Flotante Identificador ARGUMENTO |
+            Flotante Identificador Coma ARGUMENTO |
             vString Identificador
-            PuntoComa vString Identificador ARGUMENTO
+            vString Identificador Coma ARGUMENTO
 ;
 BLOQUE_METODO ::=
                 Llave_a VARIABLES BLOQ2_METOD BLOQUE_METODO |
